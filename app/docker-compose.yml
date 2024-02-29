@@ -1,15 +1,22 @@
-# points to the python back image using app.py and the dockerfile in the back directory
-# also adds the frontend service using entrypoint.sh and the dockerfile in the front directory
 version: '3'
 services:
   back:
-    build: ./back
+    build:
+      context: ./back
+      dockerfile: Dockerfile
     ports:
-      - "5000:5000"
+      - "80:80"
+    environment:
+      - FLASK_APP=app.py
+      - environment=development
   front:
-    build: ./front
+    build:
+      context: ./front
+      dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "8080:80"
     entrypoint: /entrypoint.sh
-    depends_on:
-      - back
+    environment:
+      - ws_back_url=http://localhost:5000
+    volumes:
+      - ./front:/usr/share/nginx/html
