@@ -1,1 +1,1 @@
-docker run -d -p 8080:80 --name app-front --link app-back:app-back app-front
+docker run -d -p 8080:80 --link app-back:app-back app-front
