@@ -1,1 +1,1 @@
-docker run -d -p 8080:80 --link app-back:app-back app-front
+docker run -d -p 8080:80 --link app-back:app-back -e ws_back_url=http://localhost:8080 app-front
